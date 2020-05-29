@@ -1,7 +1,11 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
 	game "github.com/Nightmarlin/golang_tour/x_and_o"
+	"os"
+	"strconv"
 )
 
 func main() {
@@ -18,6 +22,60 @@ func main() {
 	// tim := Person{"Tim", 34, Address{23, "Artemy Road", "LN1 0XX", "London", "England"}}
 	// fmt.Println(tim)
 
-	gem := game.InitGame(true)
+	gameData := game.InitGame(true)
 
+	fmt.Println(gameData)
+
+	for game.CheckWin(gameData) == "_" {
+		var currentPlayerString = ""
+		if gameData.CurrentPlayer {
+			currentPlayerString = "O"
+		} else {
+			currentPlayerString = "X"
+		}
+
+		reader := bufio.NewReader(os.Stdin)
+
+		fmt.Printf("It's %s's turn!\n X ==> ", currentPlayerString)
+		resX, _, err := reader.ReadRune()
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		fmt.Print("\n Y ==> ")
+		resY, _, err := reader.ReadRune()
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		xValid, x := validateInput(string(resX))
+		yValid, y := validateInput(string(resY))
+
+		if !xValid || yValid {
+			fmt.Println("Error: Invalid argument")
+			return
+		}
+
+		game.PlayTurn(game.Point{X: x, Y: y}, gameData)
+	}
+}
+
+func validateInput(in string) (bool, int) {
+	switch in {
+	case "0":
+		fallthrough
+	case "1":
+		fallthrough
+	case "2":
+		res, err := strconv.Atoi(in)
+		if err != nil {
+			return false, 0
+		}
+		return true, res
+
+	default:
+		return false, 0
+	}
 }

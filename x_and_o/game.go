@@ -14,12 +14,12 @@ type Point struct {
 // Data - Stores the data for the game
 type Data struct {
 	board         [][]string
-	currentPlayer bool
+	CurrentPlayer bool
 	latestMove    Point
 	turnCount     int
 }
 
-// InitGame - Set up a new gamegit
+// InitGame - Set up a new game
 func InitGame(startingPlayer bool) Data {
 	board := [][]string{
 		{"_", "_", "_"},
@@ -28,7 +28,7 @@ func InitGame(startingPlayer bool) Data {
 	}
 	var res = Data{
 		board:         board,
-		currentPlayer: startingPlayer,
+		CurrentPlayer: startingPlayer,
 		latestMove:    Point{0, 0},
 		turnCount:     0,
 	}
@@ -49,13 +49,13 @@ func PlayTurn(move Point, game Data) bool {
 		return false
 	}
 
-	if game.currentPlayer {
+	if game.CurrentPlayer {
 		game.board[y][x] = "O"
 	} else {
 		game.board[y][x] = "X"
 	}
 
-	game.currentPlayer = !game.currentPlayer
+	game.CurrentPlayer = !game.CurrentPlayer
 	game.latestMove = move
 	game.turnCount++
 	return true
@@ -63,7 +63,7 @@ func PlayTurn(move Point, game Data) bool {
 
 // CheckWin - Returns "_" if no winner, "O" if O wins, "X" if X wins and "tie" if it's a draw
 func CheckWin(game Data) string {
-	refX, refY, player := game.latestMove.X, game.latestMove.Y, !game.currentPlayer
+	refX, refY, player := game.latestMove.X, game.latestMove.Y, !game.CurrentPlayer
 
 	var playerString string
 	if player {
