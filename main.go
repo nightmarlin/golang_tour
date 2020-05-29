@@ -26,7 +26,7 @@ func main() {
 
 	fmt.Println(gameData)
 
-	for game.CheckWin(gameData) == "_" {
+	for (gameData.CheckWin()) == "_" {
 		var currentPlayerString = ""
 		if gameData.CurrentPlayer {
 			currentPlayerString = "O"
@@ -58,7 +58,7 @@ func main() {
 			return
 		}
 
-		game.PlayTurn(game.Point{X: x, Y: y}, gameData)
+		gameData.PlayTurn(game.Point{X: x, Y: y})
 	}
 }
 

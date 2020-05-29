@@ -36,7 +36,7 @@ func InitGame(startingPlayer bool) Data {
 }
 
 // PlayTurn - Make a move
-func PlayTurn(move Point, game Data) bool {
+func (game Data) PlayTurn(move Point) bool {
 	x, y := move.X, move.Y
 
 	// Out of Bounds
@@ -62,7 +62,7 @@ func PlayTurn(move Point, game Data) bool {
 }
 
 // CheckWin - Returns "_" if no winner, "O" if O wins, "X" if X wins and "tie" if it's a draw
-func CheckWin(game Data) string {
+func (game Data) CheckWin() string {
 	refX, refY, player := game.latestMove.X, game.latestMove.Y, !game.CurrentPlayer
 
 	var playerString string
@@ -113,7 +113,7 @@ func CheckWin(game Data) string {
 	return "_"
 }
 
-func printBoard(game Data) {
+func (game Data) printBoard() {
 	// / 0 1 2
 	// 0 _ _ _
 	// 1 _ _ _
