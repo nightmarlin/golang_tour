@@ -5,13 +5,13 @@ import (
 	"strings"
 )
 
-// GamePoint - Describes a move in the game
+// Point - Describes a move in the game
 type Point struct {
 	X int
 	Y int
 }
 
-// GameData - Stores the data for the game
+// Data - Stores the data for the game
 type Data struct {
 	board         [][]string
 	currentPlayer bool
@@ -20,7 +20,7 @@ type Data struct {
 }
 
 // InitGame - Set up a new gamegit
-func InitGame(startingPlayer bool) GameData {
+func InitGame(startingPlayer bool) Data {
 	board := [][]string{
 		{"_", "_", "_"},
 		{"_", "_", "_"},

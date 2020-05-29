@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Nightmarlin/golang_tour/x_and_o"
+	game "github.com/Nightmarlin/golang_tour/x_and_o"
 )
 
 func main() {
