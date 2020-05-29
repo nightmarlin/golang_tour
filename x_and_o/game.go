@@ -15,7 +15,7 @@ type Point struct {
 type Data struct {
 	board         [][]string
 	currentPlayer bool
-	latestMove    GamePoint
+	latestMove    Point
 	turnCount     int
 }
 
@@ -26,17 +26,17 @@ func InitGame(startingPlayer bool) GameData {
 		{"_", "_", "_"},
 		{"_", "_", "_"},
 	}
-	var res = GameData{
+	var res = Data{
 		board:         board,
 		currentPlayer: startingPlayer,
-		latestMove:    GamePoint{0, 0},
+		latestMove:    Point{0, 0},
 		turnCount:     0,
 	}
 	return res
 }
 
 // PlayTurn - Make a move
-func PlayTurn(move GamePoint, game GameData) bool {
+func PlayTurn(move Point, game Data) bool {
 	x, y := move.X, move.Y
 
 	// Out of Bounds
@@ -62,7 +62,7 @@ func PlayTurn(move GamePoint, game GameData) bool {
 }
 
 // CheckWin - Returns "_" if no winner, "O" if O wins, "X" if X wins and "tie" if it's a draw
-func CheckWin(game GameData) string {
+func CheckWin(game Data) string {
 	refX, refY, player := game.latestMove.X, game.latestMove.Y, !game.currentPlayer
 
 	var playerString string
@@ -113,7 +113,7 @@ func CheckWin(game GameData) string {
 	return "_"
 }
 
-func printBoard(game GameData) {
+func printBoard(game Data) {
 	// / 0 1 2
 	// 0 _ _ _
 	// 1 _ _ _
